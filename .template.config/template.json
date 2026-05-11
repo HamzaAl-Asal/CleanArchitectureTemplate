@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Hamza Alasal",
+  "classifications": [
+    "Web",
+    "API",
+    "Clean Architecture"
+  ],
+  "identity": "CleanArchitectureTemplate",
+  "name": "Clean Architecture Minimal API Template",
+  "shortName": "cleanarch",
+  "sourceName": "CleanArchitectureTemplate",
+  "preferNameDirectory": true
+}
