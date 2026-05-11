@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Modules/">
+    <Project Path="Modules/CleanArchitectureTemplate.App/CleanArchitectureTemplate.App.csproj" />
+    <Project Path="Modules/CleanArchitectureTemplate.Domain/CleanArchitectureTemplate.Domain.csproj" />
+    <Project Path="Modules/CleanArchitectureTemplate.Infrastructure/CleanArchitectureTemplate.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Shared/">
+    <Project Path="Modules/Shared/CleanArchitectureTemplate.Common/CleanArchitectureTemplate.Common.csproj" Id="d9a55065-53b6-416e-aa6f-7efe05045d86" />
+  </Folder>
+  <Project Path="CleanArchitectureTemplate.Api/CleanArchitectureTemplate.Api.csproj" />
+</Solution>
