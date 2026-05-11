@@ -7,5 +7,8 @@
   <Folder Name="/Modules/Shared/">
     <Project Path="Modules/Shared/CleanArchitectureTemplate.Common/CleanArchitectureTemplate.Common.csproj" Id="d9a55065-53b6-416e-aa6f-7efe05045d86" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="LICENSE" />
+  </Folder>
   <Project Path="CleanArchitectureTemplate.Api/CleanArchitectureTemplate.Api.csproj" />
 </Solution>
