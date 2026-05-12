@@ -18,9 +18,9 @@ namespace CleanArchitectureTemplate.Api.Endpoints.WeatherForecast
             return app;
         }
 
-        private static async Task<IResult> HandleGetAll([FromServices] IWeatherForecastService weatherForecastservice)
+        private static async Task<IResult> HandleGetAll([FromServices] IWeatherForecastService weatherForecastService)
         {
-            var response = await weatherForecastservice.GetAllAsync();
+            var response = await weatherForecastService.GetAllAsync();
 
             return Results.Ok(new ApiResponse<IEnumerable<WeatherForecastResponse>>
             {
@@ -31,9 +31,9 @@ namespace CleanArchitectureTemplate.Api.Endpoints.WeatherForecast
 
         private static async Task<IResult> HandleGetById(
             [FromRoute] Guid id,
-            [FromServices] IWeatherForecastService weatherForecastservice)
+            [FromServices] IWeatherForecastService weatherForecastService)
         {
-            var response = await weatherForecastservice.GetByIdAsync(id);
+            var response = await weatherForecastService.GetByIdAsync(id);
 
             if (response is null)
             {
