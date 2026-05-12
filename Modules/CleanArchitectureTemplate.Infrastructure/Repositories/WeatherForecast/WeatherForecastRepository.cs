@@ -5,41 +5,34 @@ namespace CleanArchitectureTemplate.Infrastructure.Repositories.WeatherForecast
 {
     public class WeatherForecastRepository : IWeatherForecastRepository
     {
-        private static readonly string[] Summaries =
-        {
+        private static readonly IReadOnlyList<string> Summaries =
+        [
             "Freezing", "Bracing", "Chilly", "Cool", "Mild",
             "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        ];
 
         private static readonly List<WeatherForecastEntity> WeatherForecasts =
-            [.. Enumerable.Range(1, 5)
+        [
+            .. Enumerable.Range(1, 5)
             .Select(index => new WeatherForecastEntity
             {
                 Id = Guid.NewGuid(),
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })];
+                Summary = Summaries[Random.Shared.Next(Summaries.Count)]
+            })
+        ];
 
-        public async Task<IEnumerable<WeatherForecastEntity>> GetAllAsync()
+        public Task<IEnumerable<WeatherForecastEntity>> GetAllAsync()
         {
-            await Task.CompletedTask;
-
-            return WeatherForecasts;
+            return Task.FromResult<IEnumerable<WeatherForecastEntity>>(WeatherForecasts);
         }
 
-        public async Task<WeatherForecastEntity> GetByIdAsync(Guid id)
+        public Task<WeatherForecastEntity?> GetByIdAsync(Guid id)
         {
-            await Task.CompletedTask;
+            var weatherForecast = WeatherForecasts.FirstOrDefault(x => x.Id == id);
 
-            var data = WeatherForecasts.FirstOrDefault(x => x.Id == id);
-
-            if (data is null)
-            {
-                return new WeatherForecastEntity();
-            }
-
-            return data;
+            return Task.FromResult(weatherForecast);
         }
     }
 }

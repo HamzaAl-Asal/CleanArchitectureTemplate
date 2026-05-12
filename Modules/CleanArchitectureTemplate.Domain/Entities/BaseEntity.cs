@@ -1,7 +1,7 @@
 ﻿namespace CleanArchitectureTemplate.Domain.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<T>
     {
-        public Guid Id { get; set; }
+        public required T Id { get; set; }
     }
 }

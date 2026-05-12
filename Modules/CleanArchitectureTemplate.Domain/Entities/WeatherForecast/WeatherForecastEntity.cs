@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitectureTemplate.Domain.Entities.WeatherForecast
 {
-    public class WeatherForecastEntity : BaseEntity
+    public class WeatherForecastEntity : BaseEntity<Guid>
     {
         public DateOnly Date { get; set; }
 

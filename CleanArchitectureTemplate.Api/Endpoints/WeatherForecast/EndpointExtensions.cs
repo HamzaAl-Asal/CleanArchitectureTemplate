@@ -9,7 +9,8 @@ namespace CleanArchitectureTemplate.Api.Endpoints.WeatherForecast
     {
         public static IEndpointRouteBuilder MapWeatherForecastEndpoints(this IEndpointRouteBuilder app)
         {
-            var group = app.MapGroup("api/weatherforecast");
+            var group = app.MapGroup("api/weatherforecast")
+                .WithTags("Weather Forecast");
 
             group.MapGet("/", HandleGetAll);
             group.MapGet("/{id:guid}", HandleGetById);

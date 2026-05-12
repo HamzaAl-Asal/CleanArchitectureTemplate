@@ -1,46 +1,47 @@
 ﻿using CleanArchitectureTemplate.App.Interfaces.WeatherForecast;
 using CleanArchitectureTemplate.App.Services.WeatherForecast.Models;
 
-namespace CleanArchitectureTemplate.App.Services.WeatherForecast
+namespace CleanArchitectureTemplate.App.Services.WeatherForecast;
+
+public class WeatherForecastService : IWeatherForecastService
 {
-    public class WeatherForecastService : IWeatherForecastService
+    private readonly IWeatherForecastRepository weatherForecastRepository;
+
+    public WeatherForecastService(IWeatherForecastRepository weatherForecastRepository)
     {
-        private readonly IWeatherForecastRepository weatherForecastRepository;
+        this.weatherForecastRepository = weatherForecastRepository;
+    }
 
-        public WeatherForecastService(IWeatherForecastRepository weatherForecastRepository)
+    public async Task<IEnumerable<WeatherForecastResponse>> GetAllAsync()
+    {
+        var weatherForecasts = await weatherForecastRepository.GetAllAsync();
+
+        var response = weatherForecasts.Select(x => new WeatherForecastResponse
         {
-            this.weatherForecastRepository = weatherForecastRepository;
+            Id = x.Id,
+            Date = x.Date,
+            TemperatureC = x.TemperatureC,
+            Summary = x.Summary
+        });
+
+        return response;
+    }
+
+    public async Task<WeatherForecastResponse> GetByIdAsync(Guid id)
+    {
+        var weatherForecast = await weatherForecastRepository.GetByIdAsync(id);
+
+        if (weatherForecast is null)
+        {
+            return new WeatherForecastResponse();
         }
 
-        public async Task<IEnumerable<WeatherForecastResponse>> GetAllAsync()
+        return new WeatherForecastResponse
         {
-            var data = await weatherForecastRepository.GetAllAsync();
-
-            return data.Select(x => new WeatherForecastResponse
-            {
-                Id = x.Id,
-                Date = x.Date,
-                TemperatureC = x.TemperatureC,
-                Summary = x.Summary
-            });
-        }
-
-        public async Task<WeatherForecastResponse> GetByIdAsync(Guid id)
-        {
-            var data = await weatherForecastRepository.GetByIdAsync(id);
-
-            if (data is null)
-            {
-                return new WeatherForecastResponse();
-            }
-
-            return new WeatherForecastResponse
-            {
-                Id = data.Id,
-                Date = data.Date,
-                TemperatureC = data.TemperatureC,
-                Summary = data.Summary
-            };
-        }
+            Id = weatherForecast.Id,
+            Date = weatherForecast.Date,
+            TemperatureC = weatherForecast.TemperatureC,
+            Summary = weatherForecast.Summary
+        };
     }
 }
