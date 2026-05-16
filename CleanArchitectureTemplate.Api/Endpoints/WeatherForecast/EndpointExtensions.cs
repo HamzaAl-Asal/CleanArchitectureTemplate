@@ -1,4 +1,5 @@
-﻿using CleanArchitectureTemplate.App.Interfaces.WeatherForecast;
+﻿using CleanArchitectureTemplate.Api.Endpoints.Constants;
+using CleanArchitectureTemplate.App.Interfaces.WeatherForecast;
 using CleanArchitectureTemplate.App.Services.WeatherForecast.Models;
 using CleanArchitectureTemplate.Common.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,9 @@ namespace CleanArchitectureTemplate.Api.Endpoints.WeatherForecast
     {
         public static IEndpointRouteBuilder MapWeatherForecastEndpoints(this IEndpointRouteBuilder app)
         {
-            var group = app.MapGroup("api/weatherforecasts")
-                .WithTags("Weather Forecast");
+            var group = app
+                .MapGroup(EndpointRoute.WeatherForecast)
+                .WithTags(EndpointTag.WeatherForecast);
 
             group.MapGet("/", HandleGetAll);
             group.MapGet("/{id:guid}", HandleGetById);
@@ -37,7 +39,11 @@ namespace CleanArchitectureTemplate.Api.Endpoints.WeatherForecast
 
             if (response is null)
             {
-                return Results.NotFound();
+                return Results.NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "Weather forecast not found."
+                });
             }
 
             return Results.Ok(new ApiResponse<WeatherForecastResponse>
