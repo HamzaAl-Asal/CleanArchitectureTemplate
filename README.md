@@ -1,34 +1,43 @@
 # Clean Architecture Minimal API Template
 
-A reusable .NET Clean Architecture template using Minimal APIs and AI-guided architecture documentation.
+A reusable .NET Clean Architecture template built with Minimal APIs, modular architecture, and AI-guided development conventions.
+
+The template focuses on simplicity, scalability, maintainability, and AI-friendly architecture guidance.
 
 ---
 
 # Features
 
 - Clean Architecture
-- Minimal APIs
+- .NET Minimal APIs
 - Service Layer Pattern
 - Repository Pattern
-- DTO Mapping
+- Explicit DTO Mapping
 - Modular Dependency Injection
+- Centralized Endpoint Registration
+- Centralized Endpoint Route and Tag Constants
 - AI-ready architecture documentation
 - Installable .NET Template
+- GitHub Actions CI Pipeline
 
 ---
 
 # Architecture
 
-Application flow:
+## Application Flow
 
 ```plaintext
 API -> App -> Infrastructure
 ```
 
-Request flow:
+---
+
+## Request Flow
 
 ```plaintext
 Endpoint -> Service -> Repository -> Entity
+                 ↓
+               Mapper
 ```
 
 ---
@@ -59,9 +68,16 @@ CleanArchitectureTemplate
 
 Responsible for:
 - Minimal API endpoints
-- Swagger/OpenAPI
+- Swagger configuration
 - Application startup
-- Dependency injection registrations
+- Endpoint registration
+- HTTP response handling
+
+Contains:
+- Endpoints
+- Endpoint constants
+- Extension methods
+- Program.cs
 
 ---
 
@@ -70,8 +86,16 @@ Responsible for:
 Responsible for:
 - Services
 - Interfaces
-- DTOs
+- DTOs and response models
 - Business orchestration
+- DTO mapping
+
+Contains:
+- Services
+- Interfaces
+- Mappers
+- Models
+- ServiceCollectionExtensions
 
 ---
 
@@ -79,7 +103,11 @@ Responsible for:
 
 Responsible for:
 - Entities
+- Base entities
 - Core business models
+
+Contains:
+- Entities
 
 ---
 
@@ -88,6 +116,11 @@ Responsible for:
 Responsible for:
 - Repository implementations
 - Data access logic
+- External integrations
+
+Contains:
+- Repositories
+- ServiceCollectionExtensions
 
 ---
 
@@ -96,12 +129,17 @@ Responsible for:
 Responsible for:
 - Shared reusable models
 - Shared utilities
+- Shared API response models
+
+Contains:
+- Shared models
+- Shared utilities
 
 ---
 
 # Dependency Rules
 
-Allowed:
+Allowed references:
 
 ```plaintext
 API -> App
@@ -114,12 +152,14 @@ Infrastructure -> App
 Infrastructure -> Domain
 ```
 
-Forbidden:
+Forbidden references:
 
 ```plaintext
 Domain -> Any project
+
 App -> API
 App -> Infrastructure
+
 Domain -> Infrastructure
 ```
 
@@ -129,16 +169,17 @@ Domain -> Infrastructure
 
 - Clean Architecture
 - Minimal APIs
-- Service Layer
+- Service Layer Pattern
 - Repository Pattern
 - Dependency Injection
-- DTO Mapping
+- Explicit DTO Mapping
+- Modular Endpoint Registration
 
 ---
 
 # AI Architecture Support
 
-This repository includes AI instruction files to help AI tools generate code following the existing architecture.
+This repository includes AI instruction files to help AI tools generate code following the existing architecture conventions and dependency rules.
 
 Included files:
 
@@ -159,7 +200,7 @@ These files help tools like:
 - Cursor
 - Windsurf
 
-follow the architecture rules and patterns consistently.
+generate code consistently following the project architecture.
 
 ---
 
@@ -169,6 +210,12 @@ Install the template locally:
 
 ```bash
 dotnet new install .
+```
+
+Install directly from GitHub:
+
+```bash
+dotnet new install https://github.com/HamzaAl-Asal/CleanArchitectureTemplate
 ```
 
 ---
@@ -196,13 +243,17 @@ MyProject.Infrastructure
 
 - WeatherForecast GetAll endpoint
 - WeatherForecast GetById endpoint
-- DTO mapping inside services
-- Modular service registration
+- Explicit DTO mapping using mapper helpers
+- Centralized endpoint route constants
+- Centralized endpoint tag constants
+- Modular dependency injection registration
+- Centralized endpoint registration
+- Swagger integration
 - AI-guided architecture documentation
 
 ---
 
-# Goals
+# Design Goals
 
 This project aims to provide:
 
@@ -210,6 +261,8 @@ This project aims to provide:
 - AI-friendly architecture guidance
 - Consistent project structure
 - Scalable Minimal API foundation
+- Explicit and maintainable architecture patterns
+- Minimal complexity during early phases
 
 ---
 
@@ -220,16 +273,19 @@ Planned future improvements:
 - Global exception handling
 - ProblemDetails support
 - Serilog logging module
-- Entity Framework Core
-- FluentValidation
-- CQRS and MediatR
+- Configurable logging sinks
+- Entity Framework Core integration
+- FluentValidation integration
 - Docker support
 - Azure deployment support
 - Architecture analyzers
+- cspell integration
+- SonarCloud integration
+- Interactive template configuration
 - JSON-based architecture specifications
 
 ---
 
 # License
 
-MIT
+Licensed under the MIT License.

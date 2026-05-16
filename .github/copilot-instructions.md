@@ -4,79 +4,139 @@
 
 # Clean Architecture Instructions
 
-Follow the existing Clean Architecture structure.
+Follow the existing Clean Architecture structure and conventions used in this repository.
 
-## General Rules
+---
+
+# General Rules
 
 - Use .NET Minimal APIs
 - Follow Clean Architecture principles
+- Keep the architecture simple and scalable
 - Keep endpoints thin
 - Use dependency injection
-- Use asynchronous methods
+- Use asynchronous methods for data access operations
+- Prefer explicit implementations over hidden abstractions
+- Keep `Program.cs` minimal and focused on application startup
 
 ---
 
-## API Layer
+# API Layer Rules
 
-- Endpoints belong in API
+- Endpoints belong in the API layer
 - Endpoints should only call services
 - Do not place business logic inside endpoints
-- Use route groups
+- Do not access repositories directly from endpoints
+- Endpoints are responsible for HTTP responses and status codes
+- Use route groups for feature endpoints
+- Use centralized endpoint route constants
+- Use centralized endpoint tag constants
+- Use centralized endpoint registration
 
 ---
 
-## App Layer
+# App Layer Rules
 
-- Services belong in App
-- DTO mapping belongs in services
+- Services belong in the App layer
+- Interfaces belong in the App layer
 - Business orchestration belongs in services
-- Interfaces belong in App
+- DTO mapping should use mapper helpers
+- Services should return DTOs instead of entities
+- Avoid infrastructure-specific logic inside services
+- App may reference Domain and Common only
 
 ---
 
-## Domain Layer
+# Domain Layer Rules
 
-- Domain contains entities only
-- Domain must not reference other projects
+- Domain contains entities and core business models only
 - Domain must remain framework independent
+- Domain must not reference other projects
+- Base entities belong in Domain
 
 ---
 
-## Infrastructure Layer
+# Infrastructure Layer Rules
 
 - Repository implementations belong in Infrastructure
-- Infrastructure handles data access only
+- Infrastructure handles data access and external integrations
+- Repositories should contain data access logic only
+- Infrastructure may reference App and Domain only
 
 ---
 
-## DTO Rules
+# DTO and Mapping Rules
 
-- Do not expose entities directly
-- Use DTOs/responses instead
-- Map entities to DTOs inside services
-
----
-
-## Dependency Rules
-
-Allowed:
-
-- API -> App
-- API -> Infrastructure
-- App -> Domain
-- App -> Common
-- Infrastructure -> App
-- Infrastructure -> Domain
-
-Forbidden:
-
-- Domain -> Any project
-- App -> API
-- App -> Infrastructure
-- Domain -> Infrastructure
+- Do not expose entities directly from API endpoints
+- Use DTOs and response models instead
+- Use explicit mapper helpers for DTO transformations
+- Avoid hidden or automatic mapping behavior
+- Prefer readable and explicit mappings
 
 ---
 
-## Architecture Flow
+# Dependency Injection Rules
 
+- Each module should register its own services
+- Dependency injection configuration should remain modular
+- Use extension methods for service registrations
+
+Example:
+
+```csharp
+builder.Services
+    .RegisterAppModuleServices()
+    .RegisterInfrastructureModuleServices();
+```
+
+---
+
+# Dependency Rules
+
+Allowed references:
+
+```plaintext
+API -> App
+API -> Infrastructure
+
+App -> Domain
+App -> Common
+
+Infrastructure -> App
+Infrastructure -> Domain
+```
+
+Forbidden references:
+
+```plaintext
+Domain -> Any project
+
+App -> API
+App -> Infrastructure
+
+Domain -> Infrastructure
+```
+
+---
+
+# Architecture Flow
+
+```plaintext
 Endpoint -> Service -> Repository -> Entity
+                 ↓
+               Mapper
+```
+
+---
+
+# Design Goals
+
+Prioritize:
+- readability,
+- maintainability,
+- modularity,
+- explicit architecture,
+- AI-friendly conventions,
+- minimal complexity.
+
+Avoid unnecessary abstractions and overengineering.
