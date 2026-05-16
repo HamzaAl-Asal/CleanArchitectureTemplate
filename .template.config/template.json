@@ -16,5 +16,14 @@
   "tags": {
     "language": "C#",
     "type": "project"
-  }
+  },
+  "sourceModifiers": [
+    {
+      "exclude": [
+        ".vs/**",
+        "**/bin/**",
+        "**/obj/**"
+      ]
+    }
+  ]
 }
