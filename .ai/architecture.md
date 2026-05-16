@@ -2,59 +2,89 @@
 
 ## Overview
 
-This project follows Clean Architecture using .NET Minimal APIs.
+This project follows Clean Architecture principles using .NET Minimal APIs.
 
-Architecture flow:
+The template is designed to provide:
+- a clean and scalable architecture,
+- modular project structure,
+- clear dependency boundaries,
+- AI-friendly development conventions.
 
+---
+
+# Architecture Flow
+
+```plaintext
 API -> App -> Infrastructure
+```
 
-## Project Structure
+---
 
-### API
+# Request Flow
+
+```plaintext
+Endpoint -> Service -> Repository -> Entity
+                 ↓
+               Mapper
+```
+
+---
+
+# Project Structure
+
+## API
 
 Responsible for:
 - Minimal API endpoints
-- Swagger/OpenAPI
-- Dependency injection registrations
+- Swagger configuration
 - Application startup
+- Endpoint registration
+- HTTP response handling
 
 Contains:
 - Endpoints
+- Endpoint constants
+- Extension methods
 - Program.cs
 
 ---
 
-### App
+## App
 
 Responsible for:
 - Service interfaces
 - Service implementations
 - DTOs and response models
 - Business orchestration
+- DTO mapping
 
 Contains:
 - Interfaces
 - Services
+- Mappers
+- Models
 - ServiceCollectionExtensions
 
 ---
 
-### Domain
+## Domain
 
 Responsible for:
 - Entities
 - Core business models
+- Base entity abstractions
 
 Contains:
 - Entities
 
 ---
 
-### Infrastructure
+## Infrastructure
 
 Responsible for:
 - Repository implementations
 - Data access logic
+- External integrations
 
 Contains:
 - Repositories
@@ -62,16 +92,20 @@ Contains:
 
 ---
 
-### Common
+## Common
 
 Responsible for:
 - Shared reusable models
 - Shared utilities
+- Shared API response models
 
 Contains:
 - Shared models
+- Shared utilities
 
-## Architecture Patterns
+---
+
+# Architecture Patterns
 
 The project currently uses:
 
@@ -80,22 +114,60 @@ The project currently uses:
 - Service Layer Pattern
 - Repository Pattern
 - Dependency Injection
-- DTO Mapping
+- Explicit DTO Mapping
+- Modular Endpoint Registration
 
-## Dependency Rules
+---
 
-- API references App and Infrastructure
-- App references Domain and Common
-- Infrastructure references App and Domain
-- Domain does not reference any project
+# Dependency Rules
 
-## Request Flow
+Allowed dependencies:
 
-Endpoint -> Service -> Repository -> Entity
+```plaintext
+API -> App
+API -> Infrastructure
 
-## Current Features
+App -> Domain
+App -> Common
+
+Infrastructure -> App
+Infrastructure -> Domain
+```
+
+Forbidden dependencies:
+
+```plaintext
+Domain -> Any project
+
+App -> API
+App -> Infrastructure
+
+Domain -> Infrastructure
+```
+
+---
+
+# Current Features
 
 - WeatherForecast GetAll endpoint
 - WeatherForecast GetById endpoint
-- DTO mapping inside services
+- Explicit DTO mapping using mapper helpers
+- Centralized endpoint route constants
+- Centralized endpoint tag constants
 - Modular dependency injection registration
+- Centralized endpoint registration
+- Swagger integration
+- AI architecture documentation
+
+---
+
+# Design Goals
+
+This template focuses on:
+- simplicity,
+- maintainability,
+- scalability,
+- readability,
+- AI-friendly architecture guidance.
+
+The project intentionally avoids unnecessary complexity during the early phases.

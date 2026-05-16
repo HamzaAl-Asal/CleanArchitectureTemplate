@@ -4,11 +4,17 @@
   "classifications": [
     "Web",
     "API",
-    "Clean Architecture"
+    "Clean Architecture",
+    "Minimal API"
   ],
   "identity": "CleanArchitectureTemplate",
   "name": "Clean Architecture Minimal API Template",
   "shortName": "cleanarch",
   "sourceName": "CleanArchitectureTemplate",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "description": "A Clean Architecture starter template for .NET Minimal APIs with modular structure, DTO mapping, repository pattern, and AI-friendly architecture guidance.",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
 }
