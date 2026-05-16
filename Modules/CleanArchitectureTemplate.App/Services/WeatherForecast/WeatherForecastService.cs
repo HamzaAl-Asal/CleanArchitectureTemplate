@@ -1,4 +1,5 @@
 ﻿using CleanArchitectureTemplate.App.Interfaces.WeatherForecast;
+using CleanArchitectureTemplate.App.Mappers.WeatherForecast;
 using CleanArchitectureTemplate.App.Services.WeatherForecast.Models;
 
 namespace CleanArchitectureTemplate.App.Services.WeatherForecast;
@@ -16,32 +17,23 @@ public class WeatherForecastService : IWeatherForecastService
     {
         var weatherForecasts = await weatherForecastRepository.GetAllAsync();
 
-        var response = weatherForecasts.Select(x => new WeatherForecastResponse
-        {
-            Id = x.Id,
-            Date = x.Date,
-            TemperatureC = x.TemperatureC,
-            Summary = x.Summary
-        });
+        var mappedWeatherForecasts = weatherForecasts
+            .Select(WeatherForecastMapper.MapToResponse)
+            .ToList();
 
-        return response;
+        return mappedWeatherForecasts;
     }
 
-    public async Task<WeatherForecastResponse> GetByIdAsync(Guid id)
+    public async Task<WeatherForecastResponse?> GetByIdAsync(Guid id)
     {
         var weatherForecast = await weatherForecastRepository.GetByIdAsync(id);
 
         if (weatherForecast is null)
         {
-            return new WeatherForecastResponse();
+            return null;
         }
 
-        return new WeatherForecastResponse
-        {
-            Id = weatherForecast.Id,
-            Date = weatherForecast.Date,
-            TemperatureC = weatherForecast.TemperatureC,
-            Summary = weatherForecast.Summary
-        };
+        var mappedWeatherForecast = WeatherForecastMapper.MapToResponse(weatherForecast);
+        return mappedWeatherForecast;
     }
 }
