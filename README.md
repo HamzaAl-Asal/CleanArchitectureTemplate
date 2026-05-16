@@ -239,6 +239,84 @@ MyProject.Infrastructure
 
 ---
 
+# Getting Started
+
+## 1. Install the Template
+
+Install directly from GitHub:
+
+```bash
+dotnet new install https://github.com/HamzaAl-Asal/CleanArchitectureTemplate
+```
+
+---
+
+## 2. Create a New Project
+
+Generate a new solution using the template:
+
+```bash
+dotnet new cleanarch -n MyProject
+```
+
+---
+
+## 3. Open the Generated Solution
+
+```bash
+cd MyProject
+```
+
+Open the solution using:
+- Visual Studio
+- Rider
+- VS Code
+
+---
+
+## 4. Build the Project
+
+```bash
+dotnet build
+```
+
+---
+
+## 5. Run the API
+
+```bash
+dotnet run --project MyProject.Api
+```
+
+---
+
+## 6. Open Swagger
+
+After running the API, open Swagger using the URL shown in the terminal:
+
+```plaintext
+https://localhost:{port}/swagger
+```
+
+---
+
+## 7. Start Building Features
+
+Follow the existing architecture conventions:
+
+```plaintext
+Endpoint -> Service -> Repository -> Entity
+                 ↓
+               Mapper
+```
+
+Use:
+- thin endpoints,
+- services for orchestration,
+- repositories for data access,
+- mapper helpers for DTO transformations.
+---
+
 # Current Features
 
 - WeatherForecast GetAll endpoint
