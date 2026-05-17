@@ -206,16 +206,26 @@ generate code consistently following the project architecture.
 
 # Installation
 
-Install the template locally:
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/HamzaAl-Asal/CleanArchitectureTemplate
+```
+
+---
+
+## 2. Navigate to the Repository
+
+```bash
+cd CleanArchitectureTemplate
+```
+
+---
+
+## 3. Install the Template
 
 ```bash
 dotnet new install .
-```
-
-Install directly from GitHub:
-
-```bash
-dotnet new install https://github.com/HamzaAl-Asal/CleanArchitectureTemplate
 ```
 
 ---
@@ -241,17 +251,7 @@ MyProject.Infrastructure
 
 # Getting Started
 
-## 1. Install the Template
-
-Install directly from GitHub:
-
-```bash
-dotnet new install https://github.com/HamzaAl-Asal/CleanArchitectureTemplate
-```
-
----
-
-## 2. Create a New Project
+## 1. Create a New Project
 
 Generate a new solution using the template:
 
@@ -261,7 +261,7 @@ dotnet new cleanarch -n MyProject
 
 ---
 
-## 3. Open the Generated Solution
+## 2. Open the Generated Solution
 
 ```bash
 cd MyProject
@@ -274,7 +274,7 @@ Open the solution using:
 
 ---
 
-## 4. Build the Project
+## 3. Build the Project
 
 ```bash
 dotnet build
@@ -282,7 +282,7 @@ dotnet build
 
 ---
 
-## 5. Run the API
+## 4. Run the API
 
 ```bash
 dotnet run --project MyProject.Api
@@ -290,7 +290,7 @@ dotnet run --project MyProject.Api
 
 ---
 
-## 6. Open Swagger
+## 5. Open Swagger
 
 After running the API, open Swagger using the URL shown in the terminal:
 
@@ -300,7 +300,7 @@ https://localhost:{port}/swagger
 
 ---
 
-## 7. Start Building Features
+## 6. Start Building Features
 
 Follow the existing architecture conventions:
 
@@ -315,6 +315,7 @@ Use:
 - services for orchestration,
 - repositories for data access,
 - mapper helpers for DTO transformations.
+
 ---
 
 # Current Features
